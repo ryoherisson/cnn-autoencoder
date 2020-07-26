@@ -37,7 +37,7 @@ class CNNClassifier(object):
                     inputs = inputs.to(self.device)
                     targets = targets.to(self.device)
 
-                    outputs = self.network(inputs)
+                    outputs, _ = self.network(inputs)
 
                     loss = self.criterion(outputs, targets)
 
@@ -99,7 +99,7 @@ class CNNClassifier(object):
                         inputs = inputs.to(self.device)
                         targets = targets.to(self.device)
 
-                        outputs = self.network(inputs)
+                        outputs, _  = self.network(inputs)
 
                         loss = self.criterion(outputs, targets)
 

@@ -21,7 +21,7 @@ from utils.plot_cmx import plot_confusion_matrix
 from utils.setup_logger import setup_logger
 from models.cnn_classifier import CNNClassifier
 from models.metrics.metrics import Metrics
-from models.networks.network import SimpleCNN
+from models.networks.network import CNNAutoEncoder
 
 logger = getLogger(__name__)
 
@@ -88,7 +88,7 @@ def main():
     ### Network ###
     logger.info('preparing network...')
 
-    network = SimpleCNN(in_channels=configs['n_channels'], n_classes=configs['n_classes'])
+    network = CNNAutoEncoder(in_channels=configs['n_channels'], n_classes=configs['n_classes'])
 
     network = network.to(device)
     criterion = nn.CrossEntropyLoss()
