@@ -17,6 +17,7 @@ class CNNAutoEncoder(nn.Module):
         )
 
         self.decoder = nn.Sequential(
+            nn.Upsample(scale_factor=2, mode='bilinear'),
             UpConv2DBatchNormRelu(channels*4, channels*2, 3, 1, 0),
             UpConv2DBatchNormRelu(channels*2, channels, 3, 1, 0),
             UpConv2DBatchNormRelu(channels, in_channels, 3, 1, 0),
@@ -36,9 +37,9 @@ class CNNAutoEncoder(nn.Module):
         ae_out = self.decoder(x)
 
         x = x.view(x.size(0), -1)
-        cnn_out = self.classifier_fc(x)
+        clf_out = self.classifier_fc(x)
 
-        return cnn_out, ae_out
+        return clf_out, ae_out
 
 
 class Conv2DBatchNormRelu(nn.Module):

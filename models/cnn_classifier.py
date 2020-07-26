@@ -13,7 +13,7 @@ class CNNClassifier(object):
         self.device = kwargs['device']
         self.network = kwargs['network']
         self.optimizer = kwargs['optimizer']
-        self.criterion = kwargs['criterion']
+        self.cnn_criterion, self.ae_criterion = kwargs['criterions']
         self.train_loader, self.test_loader = kwargs['data_loaders']
         self.metrics = kwargs['metrics']
         self.save_ckpt_interval = kwargs['save_ckpt_interval']
@@ -37,9 +37,12 @@ class CNNClassifier(object):
                     inputs = inputs.to(self.device)
                     targets = targets.to(self.device)
 
-                    outputs, _ = self.network(inputs)
+                    clf_out, ae_out = self.network(inputs)
 
-                    loss = self.criterion(outputs, targets)
+                    clf_loss = self.cnn_criterion(clf_out, targets)
+                    ae_loss = self.ae_criterion(ae_out, inputs)
+
+                    loss = clf_loss + ae_loss
 
                     loss.backward()
 
@@ -48,7 +51,7 @@ class CNNClassifier(object):
 
                     train_loss += loss.item()
 
-                    pred = outputs.argmax(axis=1)
+                    pred = clf_out.argmax(axis=1)
                     n_total += targets.size(0)
                     n_correct += (pred == targets).sum().item()
 
@@ -99,15 +102,18 @@ class CNNClassifier(object):
                         inputs = inputs.to(self.device)
                         targets = targets.to(self.device)
 
-                        outputs, _  = self.network(inputs)
+                        clf_out, ae_out = self.network(inputs)
 
-                        loss = self.criterion(outputs, targets)
+                        clf_loss = self.cnn_criterion(clf_out, targets)
+                        ae_loss = self.ae_criterion(ae_out, inputs)
+
+                        loss = clf_loss + ae_loss
 
                         self.optimizer.zero_grad()
 
                         test_loss += loss.item()
 
-                        pred = outputs.argmax(axis=1)
+                        pred = clf_out.argmax(axis=1)
                         n_total += targets.size(0)
                         n_correct += (pred == targets).sum().item()
 
