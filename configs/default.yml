@@ -15,7 +15,6 @@ color_std: [0.2023, 0.1994, 0.2010]
 
 ### train parameters
 lr: 0.0001
-seed: 2
 decay: 1e-4
 classification_loss_weight: 0.5
 autoencoder_loss_weight: 0.5
