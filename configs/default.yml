@@ -4,7 +4,7 @@
 # data_root: {path to dataset}
 ##### cifar10
 dataset: cifar10
-data_root: ./data/
+data_root: /home/rizawa/Codes/recruitement/assignment/data
 
 n_classes: 10
 classes: ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
@@ -17,6 +17,8 @@ color_std: [0.2023, 0.1994, 0.2010]
 lr: 0.0001
 seed: 2
 decay: 1e-4
+classification_loss_weight: 0.5
+autoencoder_loss_weight: 0.5
 n_gpus: 1
 batch_size: 64
 n_epochs: 50
