@@ -91,7 +91,8 @@ def main():
     network = CNNAutoEncoder(in_channels=configs['n_channels'], n_classes=configs['n_classes'])
 
     network = network.to(device)
-    criterion = nn.CrossEntropyLoss()
+    cnn_criterion = nn.CrossEntropyLoss()
+    ae_criterion = nn.MSELoss()
     optimizer = optim.Adam(network.parameters(), lr=configs['lr'])
 
     if configs['resume']:
@@ -125,7 +126,7 @@ def main():
         'device': device,
         'network': network,
         'optimizer': optimizer,
-        'criterion': criterion,
+        'criterions': (cnn_criterion, ae_criterion),
         'data_loaders': (train_loader, test_loader),
         'metrics': metrics,
         'n_classses': configs['n_classes'],
