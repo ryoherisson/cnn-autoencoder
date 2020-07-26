@@ -127,6 +127,8 @@ def main():
         'network': network,
         'optimizer': optimizer,
         'criterions': (cnn_criterion, ae_criterion),
+        'classification_loss_weight': configs['classification_loss_weight'],
+        'autoencoder_loss_weight': configs['autoencoder_loss_weight'],
         'data_loaders': (train_loader, test_loader),
         'metrics': metrics,
         'n_classses': configs['n_classes'],

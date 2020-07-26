@@ -14,6 +14,8 @@ class CNNClassifier(object):
         self.network = kwargs['network']
         self.optimizer = kwargs['optimizer']
         self.cnn_criterion, self.ae_criterion = kwargs['criterions']
+        self.clf_loss_weight = kwargs['classification_loss_weight']
+        self.ae_loss_weight = kwargs['autoencoder_loss_weight']
         self.train_loader, self.test_loader = kwargs['data_loaders']
         self.metrics = kwargs['metrics']
         self.save_ckpt_interval = kwargs['save_ckpt_interval']
@@ -42,7 +44,7 @@ class CNNClassifier(object):
                     clf_loss = self.cnn_criterion(clf_out, targets)
                     ae_loss = self.ae_criterion(ae_out, inputs)
 
-                    loss = clf_loss + ae_loss
+                    loss = self.clf_loss_weight * clf_loss + self.ae_loss_weight * ae_loss
 
                     loss.backward()
 
@@ -107,7 +109,7 @@ class CNNClassifier(object):
                         clf_loss = self.cnn_criterion(clf_out, targets)
                         ae_loss = self.ae_criterion(ae_out, inputs)
 
-                        loss = clf_loss + ae_loss
+                        loss = self.clf_loss_weight * clf_loss + self.ae_loss_weight * ae_loss
 
                         self.optimizer.zero_grad()
 
