@@ -4,7 +4,7 @@
 # data_root: {path to dataset}
 ##### cifar10
 dataset: cifar10
-data_root: /home/rizawa/Codes/recruitement/assignment/data
+data_root: ./data
 
 n_classes: 10
 classes: ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
@@ -29,5 +29,5 @@ save_ckpt_interval: 50
 log_dir: ./logs/
 
 # checkpoint path or None
-resume: 
+resume:
 # e.g) resume: ./logs/2020-07-26T00:19:34.918002/ckpt/best_acc_ckpt.pth
