@@ -4,7 +4,7 @@
 # data_root: {path to dataset}
 ##### cifar10
 dataset: cifar10
-data_root: ./data
+data_root: ./data/
 
 n_classes: 10
 classes: ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']

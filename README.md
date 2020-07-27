@@ -29,8 +29,9 @@ color_std: [0.2023, 0.1994, 0.2010]
 
 ### train parameters
 lr: 0.0001
-seed: 2
 decay: 1e-4
+classification_loss_weight: 0.5
+autoencoder_loss_weight: 0.5
 n_gpus: 1
 batch_size: 64
 n_epochs: 50
@@ -42,7 +43,7 @@ save_ckpt_interval: 50
 log_dir: ./logs/
 
 # checkpoint path or None
-resume: 
+resume:
 # e.g) resume: ./logs/2020-07-26T00:19:34.918002/ckpt/best_acc_ckpt.pth
 ```
 
