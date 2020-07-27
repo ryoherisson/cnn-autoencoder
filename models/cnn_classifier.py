@@ -3,8 +3,11 @@ from tqdm import tqdm
 from logging import getLogger
 from collections import OrderedDict
 
+from PIL import Image
+
 import torch
 import torch.nn as nn
+import torchvision
 
 logger = getLogger(__name__)
 
@@ -18,6 +21,7 @@ class CNNClassifier(object):
         self.ae_loss_weight = kwargs['autoencoder_loss_weight']
         self.train_loader, self.test_loader = kwargs['data_loaders']
         self.metrics = kwargs['metrics']
+        self.writer = kwargs['writer']
         self.save_ckpt_interval = kwargs['save_ckpt_interval']
         self.ckpt_dir = kwargs['ckpt_dir']
 
@@ -76,9 +80,13 @@ class CNNClassifier(object):
             self.metrics.calc_metrics(epoch, mode='train')
             self.metrics.init_cmx()
 
+            # save checkpoint
             if epoch % self.save_ckpt_interval == 0:
                 logger.info('saving checkpoint...')
                 self._save_ckpt(epoch, train_loss/(idx+1))
+
+            # save image in tensorboard
+            self._save_images(epoch, inputs.cpu()[:2], ae_out.detach().cpu()[:2], prefix='train')
 
             ### test
             logger.info('### test:')
@@ -134,6 +142,9 @@ class CNNClassifier(object):
                             loss="{:.4f}".format(test_loss / n_total),
                             acc="{:.4f}".format(accuracy)))
 
+            # save image in tensorboard
+            self._save_images(epoch, inputs.cpu()[:2], ae_out.detach().cpu()[:2], prefix='val')
+
             # calc loss, accuracy, precision, reacall, f1score and save as csv
             # if inference is True, save confusion matrix as png
             self.metrics.calc_metrics(epoch, mode='test', inference=inference)
@@ -159,3 +170,10 @@ class CNNClassifier(object):
             'optimizer_state_dict': self.optimizer.state_dict(),
             'loss': loss,
         }, ckpt_path)
+
+    def _save_images(self, epoch, inputs, outputs, prefix='train'):
+        input_images = torchvision.utils.make_grid(inputs, nrow=2, normalize=True, scale_each=True)
+        output_images = torchvision.utils.make_grid(outputs, nrow=2, normalize=True, scale_each=True)
+
+        self.writer.add_image(f'{prefix}/input_image', input_images, epoch)
+        self.writer.add_image(f'{prefix}/output_image', output_images, epoch)

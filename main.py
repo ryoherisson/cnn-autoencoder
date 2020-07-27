@@ -131,6 +131,7 @@ def main():
         'autoencoder_loss_weight': configs['autoencoder_loss_weight'],
         'data_loaders': (train_loader, test_loader),
         'metrics': metrics,
+        'writer': writer,
         'n_classses': configs['n_classes'],
         'save_ckpt_interval': configs['save_ckpt_interval'],
         'ckpt_dir': paths.ckpt_dir,
