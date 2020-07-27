@@ -10,7 +10,7 @@ $ pip install -r requirements.txt
 
 ## Usage
 ### Configs
-Create a configuration file based on configs/default.yaml.
+Create a configuration file based on configs/default.yml.
 ```bash
 ### dataset
 ##### if custom dataset
@@ -73,12 +73,12 @@ An example of a custom dataset can be found in the dataset folder.
 
 ### Train
 ```bash
-$ python main.py --config ./configs/default.yaml
+$ python main.py --config ./configs/default.yml
 ```
 
 ### Inference
 ```bash
-$ python main.py --config ./configs/default.yaml --inference
+$ python main.py --config ./configs/default.yml --inference
 ```
 
 ### Tensorboard
