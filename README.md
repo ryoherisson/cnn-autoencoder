@@ -1,6 +1,6 @@
-# SimpleCNN with pytorch
-This is a pytorch implementation of the CNN Classifier.  
-Cifar10 is available for the dataset by default.  
+# CNN-AutoEncoder with pytorch
+This is a pytorch implementation of the Muti-task Learning using CNN + AutoEncoder.  
+Cifar10 is available for the datas et by default.  
 You can also use your own dataset.
 
 ## Requirements
@@ -79,6 +79,12 @@ $ python main.py --config ./configs/default.yaml
 ```bash
 $ python main.py --config ./configs/default.yaml --inference
 ```
+
+### Tensorboard
+```bash
+tensorboard --logdir={log_dir} --port={your port}
+```
+![tensorboard](docs/images/tensorboard.png)
 
 ## Output
 You will see the following output in the log directory specified in the Config file.
