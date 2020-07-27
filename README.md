@@ -84,8 +84,7 @@ $ python main.py --config ./configs/default.yaml --inference
 ```bash
 tensorboard --logdir={log_dir} --port={your port}
 ```
-![tensorboard](https://github.com/ryoherisson/CNN-AutoEncoder/docs/images/tensorboard.png)
-
+![tensorboard](docs/images/tensorboard.png)
 
 ## Output
 You will see the following output in the log directory specified in the Config file.
