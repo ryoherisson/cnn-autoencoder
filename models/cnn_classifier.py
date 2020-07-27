@@ -103,7 +103,6 @@ class CNNClassifier(object):
         test_loss = 0
         n_correct = 0
         n_total = 0
-        preds_t = torch.tensor([])
 
         with torch.no_grad():
             with tqdm(self.test_loader, ncols=100) as pbar:
