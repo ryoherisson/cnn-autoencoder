@@ -1,4 +1,4 @@
-# CNN-AutoEncoder with pytorch
+# CNN-AutoEncoder in pytorch
 This is a pytorch implementation of the Muti-task Learning using CNN + AutoEncoder.  
 Cifar10 is available for the datas et by default.  
 You can also use your own dataset.
