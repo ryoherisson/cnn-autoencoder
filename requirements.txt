@@ -133,7 +133,7 @@ python-nvd3==0.15.0
 python-slugify==3.0.3
 pytz==2019.2
 PyWavelets==1.0.3
-PyYAML==5.1.2
+PyYAML==5.4
 pyzmq==18.1.0
 regex==2018.1.10
 requests==2.22.0
