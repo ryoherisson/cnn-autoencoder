@@ -89,7 +89,7 @@ networkx==2.0
 nltk==3.4.5
 notebook==6.1.5
 numba==0.43.1
-numpy==1.16.4
+numpy==1.21.0
 nvidia-dali==0.12.0
 onnx==1.5.0
 opencv-python==3.4.1.15
